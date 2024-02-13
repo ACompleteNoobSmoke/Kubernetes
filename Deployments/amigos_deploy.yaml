@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: amigos-deploy
+spec:
+  replicas: 2
+  revisionHistoryLimit: 20
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: amigos-deploy
+  template:
+    metadata:
+      labels:
+        app: amigos-deploy
+      annotations:
+        kubernetes.io/change-cause: "Hello-World Version 4"
+    spec:
+      containers:
+      - name: amigos-deploy
+        image: amigoscode/kubernetes:hello-world-v4
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80

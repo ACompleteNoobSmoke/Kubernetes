@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world-deploy
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hello-world-deploy
+  template:
+    metadata:
+      labels:
+        app: hello-world-deploy
+      annotations:
+        kubernetes.io/change-cause: "Changed to another container to v1"
+    spec:
+      containers:
+      - name: hello-world-deploy
+        image: amigoscode/kubernetes:hello-world
+        resources:
+          limits:
+            memory: "1000Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
