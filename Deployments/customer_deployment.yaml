@@ -23,6 +23,6 @@ spec:
             cpu: "500m"
         env:
           - name: ORDER_SERVICE
-            value: "10.244.0.63:8081"
+            value: "order:8085"
         ports:
         - containerPort: 8080
