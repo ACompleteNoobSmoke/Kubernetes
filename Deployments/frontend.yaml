@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-exercise
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: frontend-exercise
+  template:
+    metadata:
+      labels:
+        app: frontend-exercise
+      annotations:
+        kubernetes.io/change-cause: "Frontend Version 1"
+    spec:
+      containers:
+      - name: frontend-exercise
+        image: amigoscode/kubernetes:frontend-v1
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp
+spec:
+  type: LoadBalancer
+  selector:
+    app: frontend-exercise
+  ports:
+  - port: 80
+    targetPort: 80
+
