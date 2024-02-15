@@ -17,6 +17,9 @@ spec:
     metadata:
       labels:
         app: amigos-deploy
+        environment: test
+        tier: frontend-exercise
+        department: engineering
       annotations:
         kubernetes.io/change-cause: "Hello-World Version 4"
     spec:

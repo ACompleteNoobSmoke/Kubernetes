@@ -11,6 +11,9 @@ spec:
     metadata:
       labels:
         app: frontend-exercise
+        environment: test
+        tier: frontend
+        department: engineering
       annotations:
         kubernetes.io/change-cause: "Frontend Version 1"
     spec:

@@ -11,6 +11,9 @@ spec:
     metadata:
       labels:
         app: hello-world-deploy
+        environment: test
+        tier: test
+        department: engineering
       annotations:
         kubernetes.io/change-cause: "Changed to another container to v1"
     spec:

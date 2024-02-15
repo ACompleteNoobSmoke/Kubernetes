@@ -11,6 +11,9 @@ spec:
     metadata:
       labels:
         app: customer
+        environment: test
+        tier: backend
+        department: engineering
       annotations:
         kubernetes.io/change-cause: "Customer Version 1"
     spec:
