@@ -54,7 +54,39 @@ spec:
       labels:
         app: config-map-deployment
     spec:
+      volumes:
+        - name: nginx-conf
+          configMap:
+            name: nginx-conf
+        - name: app-properties
+          configMap:
+            name: app-properties
+        - name: config
+          projected: 
+            sources:
+              - configMap:
+                  name: nginx-conf
+              - configMap:
+                  name: app-properties
       containers:
+      - name: config-map-deployment-volume
+        volumeMounts:
+          - mountPath: /etc/order/nginx
+            name: nginx-conf
+          - mountPath: /etc/order/properties
+            name: app-properties
+          - mountPath: /etc/order/config
+            name: config
+        image: busybox
+        command:
+          - "/bin/sh"
+          - "-c"
+        args:
+          - "env && sleep 3600"
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
       - name: config-map-deployment
         image: busybox
         resources:
