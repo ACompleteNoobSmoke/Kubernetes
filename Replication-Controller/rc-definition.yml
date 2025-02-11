@@ -5,9 +5,9 @@ metadata:
   labels: 
     app: myapp 
     type: front-end
-replicas: 3
 spec: 
-  - template: 
+    replicas: 3
+    template: 
       metadata: 
         name: myapp-pod
         labels: 

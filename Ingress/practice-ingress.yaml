@@ -13,7 +13,6 @@ spec:
       containers: 
         - args: 
             - /nginx-ingress-controller
-            - "--default-backend-service=default/my-app"
             - "--report-node-internal-ip-address=true"
           env: 
             - name: POD_NAME
