@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-deploy
+  labels:
+    app: frontend
+    name: test
+spec:
+  replicas: 3
+  selector:
+     matchLabels:
+        name: hello-world
+  template:
+    metadata:
+       name: hello-world
+       labels:
+         name: hello-world
+    spec:
+       containers:
+          - name: hello-world
+            image: amigoscode/kubernetes:hello-world
+            resources: 
+                limits:
+                  memory: "128Mi"
+                  cpu: "500m"
+            ports:
+               - containerPort: 80
