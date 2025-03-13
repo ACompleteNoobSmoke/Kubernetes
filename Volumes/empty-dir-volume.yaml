@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: emptydir-volume
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+       app: emptydir-volume
+  template:
+    metadata:
+       name: emptydir-volume-pod
+       labels:
+         app: emptydir-volume
+    spec:
+      volumes:
+         - name: cache
+           emptyDir: {}
+      containers:
+         - name: one
+           image: busybox
+           command: ["/bin/sh"]
+           args:
+              - "-c"
+              - "touch /acompletenoobsmoke/test.txt && sleep 4000"
+           resources:
+              limits:
+                memory: "128Mi"
+                cpu: "500m"
+           volumeMounts:
+              - name: cache
+                mountPath: /acompletenoobsmoke
+         - name: two
+           image: busybox
+           command:
+              - "sleep"
+              - "4000"
+           resources:
+              limits:
+                memory: "128Mi"
+                cpu: "500m"
+           volumeMounts:
+              - name: cache
+                mountPath: /foo

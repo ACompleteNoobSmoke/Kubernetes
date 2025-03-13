@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: host-path-volume
+  labels:
+     app: volume
+spec:
+  replicas: 3
+  selector:
+   matchLabels:
+     app: host-path-volume
+  template:
+    metadata:
+      name: host-path-volume-pod
+      labels:
+        app: host-path-volume
+    spec:
+      volumes:
+        - name: var-log
+          hostPath:
+            path: /var/log
+      containers:
+        - name: host-path-volume-container
+          image: busybox
+          command:
+             - "sleep"
+             - "4000"
+          resources:
+             limits:
+              memory: "128Mi"
+              cpu: "500m"
+          volumeMounts:
+             - name: var-log
+               mountPath: /uyster/log

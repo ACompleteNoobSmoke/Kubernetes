@@ -22,8 +22,8 @@ spec:
               limits:
                 memory: "500Mi"
                 cpu: "128Mi"
-         ports:
-           - containerPort: 80
+          ports:
+            - containerPort: 80
 
 
 ---
@@ -33,7 +33,7 @@ kind: Service
 metadata:
   name: frontend-service
 spec:
-   type: LoadBalanacer
+   type: LoadBalancer
    selector:
      app: frontend-pod
      tier: frontend
